@@ -194,17 +194,4 @@ gulpSassEmbedded.sync = (options = {}) => {
 	return gulpSassEmbedded({ ...options, sync: true });
 };
 
-// gulpSassEmbedded.logError = function logError(error) {
-// 	const message = new PluginError({
-// 		plugin: PLUGIN_NAME,
-// 		message: error.message,
-// 		options: {
-// 			showProperties: false,
-// 			showStack: false,
-// 		},
-// 	});
-// 	process.stderr.write(`${message}\n`);
-// 	this.emit('end');
-// };
-
 export default gulpSassEmbedded;
