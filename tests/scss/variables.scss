@@ -1,0 +1,17 @@
+@use 'sass:math';
+@use 'sass:color';
+
+$blue: #3bbfce;
+$margin: 16px;
+
+.content-navigation {
+  border-color: $blue;
+  color:
+    color.adjust($blue, $red: 15);
+}
+
+.border {
+  padding: math.div($margin, 2);
+  margin: math.div($margin, 2);
+  border-color: $blue;
+}
