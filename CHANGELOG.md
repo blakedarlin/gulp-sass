@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+- Export sass value types.
+- Add test to test value type exports.
+
 ## 1.0.2
 
 - Update packages.
