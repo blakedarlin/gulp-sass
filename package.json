@@ -30,8 +30,8 @@
 	"dependencies": {
 		"plugin-error": "^2.0.1",
 		"replace-ext": "^2.0.0",
-		"sass-embedded": "^1.97.3",
 		"streamx": "^2.23.0",
+		"sass-embedded": "^1.90.0",
 		"vinyl-sourcemaps-apply": "^0.2.1"
 	},
 	"devDependencies": {

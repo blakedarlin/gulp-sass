@@ -195,3 +195,4 @@ gulpSassEmbedded.sync = (options = {}) => {
 };
 
 export default gulpSassEmbedded;
+export { SassString, SassNumber, SassColor, SassList, SassMap, SassArgumentList, sassNull, sassTrue, sassFalse } from 'sass-embedded';

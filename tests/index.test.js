@@ -11,7 +11,19 @@ import * as url from 'node:url';
 import path from 'node:path';
 import fs from 'node:fs';
 
-import sass, { createCompileArguments, formatSassError } from '../index.js';
+import sass, {
+	createCompileArguments,
+	formatSassError,
+	SassString,
+	SassNumber,
+	SassColor,
+	SassList,
+	SassMap,
+	SassArgumentList,
+	sassNull,
+	sassTrue,
+	sassFalse,
+} from '../index.js';
 
 const createVinyl = (filename, contents) => {
 	const base = path.join(__dirname, 'scss');
@@ -532,8 +544,8 @@ describe('async compile', () => {
 				transform(file, callback) {
 					try {
 						expect(file.sourceMap).toBeTruthy();
-						expect(file.sourceMap.sources.sort()).toEqual(
-							expectedSources.sort(),
+						expect(file.sourceMap.sources.toSorted()).toEqual(
+							expectedSources.toSorted(),
 						);
 						callback(null, file);
 					} catch (error) {
@@ -626,5 +638,52 @@ describe('sync compile', () => {
 			const { actual, expected } = getCompiledAndExpected(cssFile);
 			expect(actual).toBe(expected);
 		}
+	});
+});
+
+describe('sass-embedded re-exports', () => {
+	it('re-exports SassString from sass-embedded', () => {
+		expect(SassString).toBe(sassEmbedded.SassString);
+		expect(SassString).toBeDefined();
+	});
+
+	it('re-exports SassNumber from sass-embedded', () => {
+		expect(SassNumber).toBe(sassEmbedded.SassNumber);
+		expect(SassNumber).toBeDefined();
+	});
+
+	it('re-exports SassColor from sass-embedded', () => {
+		expect(SassColor).toBe(sassEmbedded.SassColor);
+		expect(SassColor).toBeDefined();
+	});
+
+	it('re-exports SassList from sass-embedded', () => {
+		expect(SassList).toBe(sassEmbedded.SassList);
+		expect(SassList).toBeDefined();
+	});
+
+	it('re-exports SassMap from sass-embedded', () => {
+		expect(SassMap).toBe(sassEmbedded.SassMap);
+		expect(SassMap).toBeDefined();
+	});
+
+	it('re-exports SassArgumentList from sass-embedded', () => {
+		expect(SassArgumentList).toBe(sassEmbedded.SassArgumentList);
+		expect(SassArgumentList).toBeDefined();
+	});
+
+	it('re-exports sassNull from sass-embedded', () => {
+		expect(sassNull).toBe(sassEmbedded.sassNull);
+		expect(sassNull).toBeDefined();
+	});
+
+	it('re-exports sassTrue from sass-embedded', () => {
+		expect(sassTrue).toBe(sassEmbedded.sassTrue);
+		expect(sassTrue).toBeDefined();
+	});
+
+	it('re-exports sassFalse from sass-embedded', () => {
+		expect(sassFalse).toBe(sassEmbedded.sassFalse);
+		expect(sassFalse).toBeDefined();
 	});
 });
