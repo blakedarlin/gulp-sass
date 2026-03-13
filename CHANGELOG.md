@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Update packages.
+
 ## 1.1.0
 
 - Export sass value types.
