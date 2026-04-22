@@ -1,6 +1,5 @@
 import eslint from '@eslint/js';
 import globals from 'globals';
-
 import jestPlugin from 'eslint-plugin-jest';
 import eslintPluginImportX from 'eslint-plugin-import-x';
 import unicornPlugin from 'eslint-plugin-unicorn';
@@ -29,7 +28,7 @@ export default [
 	eslintPluginImportX.flatConfigs.recommended,
 
 	// More than 100 powerful ESLint rules
-	unicornPlugin.configs['flat/recommended'],
+	unicornPlugin.configs['recommended'],
 
 	{
 		languageOptions: {
