@@ -1,5 +1,16 @@
 # Changelog
 
+## 1.1.3
+
+- Update packages.
+- Refactor ESLint configuration to use `defineConfig` and `globalIgnores`.
+- Enhance tests for Sass error handling and source map validation.
+
+## 1.1.2
+
+- Update packages.
+- Refactor ESLint configuration to use unicorn `recommended` preset.
+
 ## 1.1.1
 
 - Update packages.
