@@ -169,7 +169,7 @@ const gulpSassEmbedded = (options = {}) => {
 				callback();
 			} catch (error) {
 				// Emit an error event instead of calling the callback with an error
-				this.emit(
+				transform.emit(
 					'error',
 					new PluginError(PLUGIN_NAME, error, {
 						showProperties: false,
@@ -181,9 +181,7 @@ const gulpSassEmbedded = (options = {}) => {
 	});
 
 	transform.isCompilerInitialized = () => {
-		return options?.sync
-			? compiler instanceof Compiler
-			: compiler instanceof AsyncCompiler;
+		return compiler instanceof (options?.sync ? Compiler : AsyncCompiler);
 	};
 
 	return transform;
@@ -195,4 +193,14 @@ gulpSassEmbedded.sync = (options = {}) => {
 };
 
 export default gulpSassEmbedded;
-export { SassString, SassNumber, SassColor, SassList, SassMap, SassArgumentList, sassNull, sassTrue, sassFalse } from 'sass-embedded';
+export {
+	SassString,
+	SassNumber,
+	SassColor,
+	SassList,
+	SassMap,
+	SassArgumentList,
+	sassNull,
+	sassTrue,
+	sassFalse,
+} from 'sass-embedded';

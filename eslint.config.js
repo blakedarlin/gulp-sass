@@ -1,45 +1,43 @@
-import eslint from '@eslint/js';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import js from '@eslint/js';
 import globals from 'globals';
 import jestPlugin from 'eslint-plugin-jest';
-import eslintPluginImportX from 'eslint-plugin-import-x';
+import eslintPluginImportX, {
+	flatConfigs as importXFlatConfigs,
+} from 'eslint-plugin-import-x';
 import unicornPlugin from 'eslint-plugin-unicorn';
 import prettierConfig from 'eslint-config-prettier';
 
-export default [
+export default defineConfig([
+	globalIgnores([
+		'**/node_modules/**',
+		'**/.yarn',
+		'**/.pnp.*',
+		'**/build/**',
+		'**/dist/**',
+		'coverage',
+		'docker',
+	]),
+
 	{
-		ignores: [
-			'**/node_modules/**',
-			'**/.yarn',
-			'**/.pnp.*',
-			'**/build/**',
-			'**/dist/**',
-			'coverage',
-			'docker',
-		],
+		files: ['**/*.js'],
+		plugins: { js },
+		extends: ['js/recommended'],
 	},
 
-	// Turns off all rules that are unnecessary or might conflict with Prettier.
-	prettierConfig,
-
-	// recommended eslint config
-	eslint.configs.recommended,
-
 	// Recommended import rules
-	eslintPluginImportX.flatConfigs.recommended,
+	importXFlatConfigs.recommended,
 
 	// More than 100 powerful ESLint rules
-	unicornPlugin.configs['recommended'],
+	unicornPlugin.configs.recommended,
 
 	{
 		languageOptions: {
 			globals: {
 				...globals.node,
 			},
-			parserOptions: {
-				ecmaVersion: 'latest',
-				sourceType: 'module',
-				projectService: true,
-			},
+			ecmaVersion: 'latest',
+			sourceType: 'module',
 		},
 		plugins: {
 			import: eslintPluginImportX,
@@ -66,4 +64,7 @@ export default [
 		files: ['**/*.test.js'],
 		...jestPlugin.configs['flat/recommended'],
 	},
-];
+
+	// Turns off all rules that are unnecessary or might conflict with Prettier.
+	prettierConfig,
+]);

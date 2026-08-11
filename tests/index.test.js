@@ -386,12 +386,14 @@ describe('async compile', () => {
 
 	it('gets a sass error object', async () => {
 		const errorFile = createVinyl('error.scss');
+		const expectedSassStack = expect.stringContaining(
+			path.join('tests', 'scss', 'error.scss'),
+		);
+
 		await expect(writeFileToStream(stream, errorFile)).rejects.toThrow(
 			expect.objectContaining({
 				sassMessage: 'expected "{".',
-				sassStack: expect.stringContaining(
-					path.join('tests', 'scss', 'error.scss'),
-				),
+				sassStack: expectedSassStack,
 			}),
 		);
 	});
@@ -544,8 +546,14 @@ describe('async compile', () => {
 				transform(file, callback) {
 					try {
 						expect(file.sourceMap).toBeTruthy();
-						expect(file.sourceMap.sources.toSorted()).toEqual(
-							expectedSources.toSorted(),
+						expect(
+							file.sourceMap.sources.toSorted((a, b) =>
+								a.localeCompare(b),
+							),
+						).toEqual(
+							expectedSources.toSorted((a, b) =>
+								a.localeCompare(b),
+							),
 						);
 						callback(null, file);
 					} catch (error) {
